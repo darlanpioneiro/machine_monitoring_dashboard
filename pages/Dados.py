@@ -102,7 +102,7 @@ st.dataframe(dados_filtrados, height=600)
 # Download dos dados filtrados
 csv_bytes = converter_df_para_csv(dados_filtrados)
 st.download_button(
-    label="Baixar dados filtrados em CSV",
+    label="📥 Baixar dados filtrados em CSV",  # Ícone de download adicionado
     data=csv_bytes,
     file_name='dados_filtrados.csv',
     mime='text/csv'
