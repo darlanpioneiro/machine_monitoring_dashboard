@@ -14,11 +14,46 @@ def converter_df_para_csv(df):
 # Título da página
 st.title(":green[Dados] :red[das] :blue[Máquinas] :bar_chart:")
 
-# Todos os filtros na sidebar
+# --------------------------------------
+# Sidebar - título estilizado + filtros
+# --------------------------------------
 with st.sidebar:
-    st.header("Filtros")
+    st.markdown(
+        """
+        <div style="
+            background: linear-gradient(90deg, #4ade80, #22d3ee);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(34, 211, 238, 0.45);
+            text-align: center;
+            margin-bottom: 30px;
+            ">
+            <h1 style="
+                font-family: 'Poppins', sans-serif;
+                font-weight: 900;
+                color: white;
+                margin: 0;
+                font-size: 28px;
+                text-shadow: 0 0 10px rgba(255,255,255,0.8);
+            ">
+                📊 FILTROS
+            </h1>
+            <p style="
+                font-family: 'Poppins', sans-serif;
+                font-weight: 600;
+                color: white;
+                margin-top: 5px;
+                font-size: 14px;
+                letter-spacing: 1.2px;
+                text-transform: uppercase;
+            ">Selecione os dados</p>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
-    todas_maquinas = st.checkbox("Selecionar todas as máquinas")
+    # Filtros
+    todas_maquinas = st.checkbox("Selecionar todas as máquinas", value=True)  # Marcado por padrão
 
     if todas_maquinas:
         dados_filtrados = dados.copy()
@@ -26,7 +61,7 @@ with st.sidebar:
         filtrar_multiplas = st.checkbox("Deseja filtrar mais de 1 máquina?")
 
         if filtrar_multiplas:
-            machine_filter = st.multiselect("Selecione uma ou mais Máquinas:", dados['machine'].unique(), default=dados['machine'].unique()[0])
+            machine_filter = st.multiselect("Selecione uma ou mais Máquinas:", dados['machine'].unique(), default=dados['machine'].unique())
             status_filter = st.multiselect("Selecione um ou mais Status da Máquina:", dados['machine_status'].unique(), default=dados['machine_status'].unique())
             anomaly_filter = st.multiselect("Selecione um ou mais Sinalizadores de Anomalia:", dados['anomaly_flag'].unique(), default=dados['anomaly_flag'].unique())
 

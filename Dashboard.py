@@ -21,10 +21,43 @@ dados['timestamp'] = pd.to_datetime(dados['timestamp'])
 
 # Lógica e interface para filtros (máquina, status, anomalia e intervalo de datas)
 with st.sidebar:
-    st.header("Filtros")
+    # Caixinha estilizada para os filtros
+    st.markdown(
+        """
+        <div style="
+            background: linear-gradient(90deg, #4ade80, #22d3ee);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(34, 211, 238, 0.45);
+            text-align: center;
+            margin-bottom: 30px;
+            ">
+            <h1 style="
+                font-family: 'Poppins', sans-serif;
+                font-weight: 900;
+                color: white;
+                margin: 0;
+                font-size: 28px;
+                text-shadow: 0 0 10px rgba(255,255,255,0.8);
+            ">
+                📊 FILTROS
+            </h1>
+            <p style="
+                font-family: 'Poppins', sans-serif;
+                font-weight: 600;
+                color: white;
+                margin-top: 5px;
+                font-size: 14px;
+                letter-spacing: 1.2px;
+                text-transform: uppercase;
+            ">Selecione os dados</p>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
     # Checkbox para seleção rápida de todas as máquinas (ignorar filtros de máquina)
-    todas_maquinas = st.checkbox("Selecionar todas as máquinas")
+    todas_maquinas = st.checkbox("Selecionar todas as máquinas", value=True)  # Marcado por padrão
 
     if todas_maquinas:
         # Se selecionar todas as máquinas, copia todo o dataset para filtragem posterior
@@ -35,7 +68,7 @@ with st.sidebar:
 
         if filtrar_multiplas:
             # Multiselect para máquinas, status e anomalias - permite várias seleções
-            machine_filter = st.multiselect("Selecione uma ou mais Máquinas:", dados['machine'].unique(), default=dados['machine'].unique()[0])
+            machine_filter = st.multiselect("Selecione uma ou mais Máquinas:", dados['machine'].unique(), default=dados['machine'].unique())
             status_filter = st.multiselect("Selecione um ou mais Status da Máquina:", dados['machine_status'].unique(), default=dados['machine_status'].unique())
             anomaly_filter = st.multiselect("Selecione um ou mais Sinalizadores de Anomalia:", dados['anomaly_flag'].unique(), default=dados['anomaly_flag'].unique())
 
