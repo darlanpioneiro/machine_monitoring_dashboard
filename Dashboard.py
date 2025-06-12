@@ -310,3 +310,6 @@ with abas[3]:
         medias_por_maquina.style.format({col: '{:.2f}' for col in colunas_sensores}),
         height=600
     )
+
+# Rodapé com o nome do acadêmico
+st.markdown("<br><br><hr><p style='text-align: center;'>Desenvolvido por: <strong>Darlan Pedro Caron Piaia</strong></p>", unsafe_allow_html=True)
